@@ -18,7 +18,21 @@ public class FavoritesController : ControllerBase
     _fs = fs;
   }
 
-
+  [HttpPost]
+  public async Task<ActionResult<Favorite>> CreateFavorite([FromBody] Favorite newFavorite)
+  {
+    try
+    {
+      Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+      newFavorite.AccountId = userInfo.Id;
+      Favorite createdFavorite = _fs.CreateFavorite(newFavorite);
+      return Ok(createdFavorite);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 
   
 }

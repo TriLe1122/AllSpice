@@ -6,4 +6,11 @@ public class FavoritesService{
   {
     _favoritesRepo = favoritesRepo;
   }
+
+  internal Favorite CreateFavorite(Favorite newFavorite)
+  {
+    return _favoritesRepo.CreateFavorite(newFavorite);
+  }
+
+ 
 }

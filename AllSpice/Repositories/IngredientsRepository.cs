@@ -9,8 +9,8 @@ public class IngredientsRepository : BaseRepository
   internal Ingredient CreateIngredient(Ingredient newIngredient)
   {
     string sql = @"
-           INSERT INTO ingredients(name, quantity, recipeId)
-           VALUES(@Name, @Quantity, @RecipeId);
+           INSERT INTO ingredients(name, quantity, creatorId, recipeId)
+           VALUES(@Name, @Quantity, @CreatorId, @RecipeId);
            SELECT LAST_INSERT_ID()
                 ;";
     int ingredientId = _db.ExecuteScalar<int>(sql, newIngredient);
@@ -33,5 +33,37 @@ public class IngredientsRepository : BaseRepository
       ingredient.Creator = profile;
       return ingredient;
     }, new { recipeId }).ToList();
+  }
+
+  internal Ingredient GetById(int ingredientId)
+  {
+    string sql = @"
+    SELECT
+    ing.*,
+    a.*
+    FROM ingredients ing
+    JOIN accounts a ON a.id = ing.creatorId
+    WHERE ing.id = @ingredientId
+    ;";
+    return _db.Query<Ingredient, Profile, Ingredient>(sql, (ingredient, profile) =>
+    {
+      ingredient.Creator = profile;
+      return ingredient;
+    }, new { ingredientId }).FirstOrDefault();
+  }
+
+  internal void RemoveIngredient(Ingredient foundIngredient)
+  {
+    string sql = @"
+    DELETE FROM
+    ingredients
+    WHERE
+    id = @id
+    ;";
+    var rowsAffected = _db.Execute(sql, foundIngredient);
+    if (rowsAffected == 0)
+    {
+      throw new Exception("Unable to update foundRecipe");
+    }
   }
 }
