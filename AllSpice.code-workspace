@@ -1,14 +1,17 @@
-
 {
   "folders": [
     {
-      "path": "AllSpice.client",
-      "name": "client"
+      "name": "client",
+      "path": "AllSpice.client"
     },
     {
-      "path": "AllSpice",
-      "name": "server"
-    },{"path":".github/workflows", "name":"workflows"}
+      "name": "server",
+      "path": "AllSpice"
+    },
+    {
+      "name": "workflows",
+      "path": ".github/workflows"
+    }
   ],
   "settings": {
     "editor.suggestSelection": "first",
