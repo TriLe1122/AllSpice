@@ -66,6 +66,21 @@ public class RecipesController : ControllerBase
     }
   }
 
+  [HttpGet("{recipeId}/ingredients")]
+  [Authorize]
+  public ActionResult<List<Recipe>> GetIngredientsByRecipe(int recipeId)
+  {
+    try
+    {
+      List<Ingredient> ingredients = _is.GetIngredientsByRecipe(recipeId);
+      return Ok(ingredients);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
+
 
 
   [HttpDelete("{recipeId}")]

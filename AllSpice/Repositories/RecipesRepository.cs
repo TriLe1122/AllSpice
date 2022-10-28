@@ -42,9 +42,10 @@ public class RecipesRepository : BaseRepository
     string sql = @"
             SELECT
             rec.*,
+
             a.*
             FROM recipes rec
-            JOIN accounts a ON a.id = rec.CreatorId
+            JOIN accounts a ON a.id = rec.creatorId
             LEFT JOIN favorites fav ON fav.recipeId = rec.id
             WHERE rec.id = @recipeId
             ;";
@@ -52,7 +53,7 @@ public class RecipesRepository : BaseRepository
     {
       recipe.Creator = profile;
       return recipe;
-    }, new { recipeId }).First();
+    }, new { recipeId }).FirstOrDefault();
   }
 
   internal void RemoveRecipe(Recipe foundRecipe)

@@ -60,10 +60,10 @@ public class RecipesService
     }
 
     Recipe original = GetById(recipeData.Id);
-    // original.Category = recipeData.Category ?? original.Category;
-    // original.Img = recipeData.Img ?? original.Img;
+    original.Category = recipeData.Category ?? original.Category;
+    original.Img = recipeData.Img ?? original.Img;
     original.Instructions = recipeData.Instructions ?? original.Instructions;
-    // original.Title = recipeData.Title ?? original.Title;
+    original.Title = recipeData.Title ?? original.Title;
     // original.Creator=original.Creator;
     // original.CreatorId=original.CreatorId;
     // original.FavoriteCount=original.FavoriteCount;

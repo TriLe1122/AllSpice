@@ -1,5 +1,5 @@
 namespace AllSpice.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 
@@ -19,8 +19,7 @@ public class IngredientsController : ControllerBase
 
 
   [HttpPost]
-  [Authorize]
-  public async Task<ActionResult<Ingredient>> CreateRecipe([FromBody] Ingredient newIngredient)
+  public async Task<ActionResult<Ingredient>> CreateIngredient([FromBody] Ingredient newIngredient)
   {
     try
     {
