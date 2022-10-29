@@ -18,6 +18,29 @@ public class FavoritesRepository : BaseRepository
     return newFavorite;
   }
 
+
+
+  internal void RemoveFavorite(Favorite foundFavorite)
+  {
+    string sql = @"
+    DELETE FROM
+    favorites
+    WHERE
+    id = @id LIMIT 1
+    ;";
+    _db.Execute(sql, foundFavorite);
+  }
+
+  internal Favorite GetFavoritesById(int favoriteId)
+  {
+    string sql = @"
+    SELECT *
+    FROM favorites
+    WHERE id = @favoriteId
+    ;";
+    return _db.QueryFirstOrDefault<Favorite>(sql, new { favoriteId });
+  }
+
   // internal List<FavRecipe> GetFavoriteRecipes(string accountId)
   // {
   //   string sql = @"
@@ -51,7 +74,7 @@ public class FavoritesRepository : BaseRepository
     FROM favorites f
     JOIN recipes r ON r.id = f.recipeId
     JOIN accounts a ON a.id = r.creatorId
-    WHERE r.accountId = @accountId
+    WHERE f.accountId = @accountId
     GROUP BY f.id
     ;";
     return _db.Query<FavRecipe, Profile, FavRecipe>(sql, (recipe, profile) =>
