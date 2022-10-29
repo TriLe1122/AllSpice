@@ -54,8 +54,8 @@ export default {
 
 <style lang="scss" scoped>
 .component {
-  width: 250px;
-  height: 250px;
+  width: 350px;
+  height: 350px;
   position: relative;
 
   background-size: cover;
