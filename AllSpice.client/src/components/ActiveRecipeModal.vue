@@ -1,27 +1,27 @@
 <template>
   <div class="component">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Launch demo modal
-    </button>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
           <div class="">
             <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
           </div>
-          <div class="modal-body container" v-if="recipe">
+          <div class=" container rounded" v-if="recipe">
             <div class="row">
-              <div class="col-md-5 pic" :style="{ backgroundImage: `url(${recipe.img})` }">
+              <div class="col-md-5 p-0 pic" :style="{ backgroundImage: `url(${recipe.img})` }">
+                <!-- <img :src="recipe.img" class="pic rounded-start" alt=""> -->
               </div>
-              <div class="col-md-7">
-                <div class="row">
+              <div class="col-md-7 details" :style="{ backgroundImage: `url(${recipe.img})` }">
+                <div class="row details">
+                  <div class="col-md-12 d-flex">
+                    <h3 class="text-center">{{ recipe.title }}</h3>
+                    <p class="bg-success rounded p-2 m-2">{{ recipe.category }}</p>
+                  </div>
                   <div class="col-md-6">
-                    <h6 class="text-center">Recipe Steps</h6>
-                    <p>{{recipe.instructions}}</p>
+                    <h6 class="text-center bg-danger p-2">Recipe Steps</h6>
+                    <p class="bg-primary">{{ recipe.instructions }}</p>
                   </div>
                   <div class="col-md-6">
                     <h6 class="text-center">Ingredients</h6>
@@ -30,13 +30,14 @@
                     </div>
                   </div>
                 </div>
+                <p class="text-end align-items-baseline">
+                  published
+                </p>
               </div>
+
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -89,10 +90,19 @@ export default {
 
 
 <style lang="scss" scoped>
-
-.pic{
+.pic {
   background-size: cover;
   background-position: center;
+  height: 80vh;
+  width: 474px;
+  object-fit: cover;
 }
 
+.details {
+  background-color: rgba(20, 15, 15, 0.88);
+  backdrop-filter: blur(10px);
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+}
 </style>

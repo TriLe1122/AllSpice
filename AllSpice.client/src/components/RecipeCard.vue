@@ -11,21 +11,12 @@
     </div>
   </div>
 
-
-  <!-- <div class="card text-bg-dark component">
-    <img :src="recipe.img" class="card-img" alt="...">
-    <div class="card-img-overlay">
-      <h5 class="card-title">{{ recipe.category }}</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-        This content is a little bit longer.</p>
-      <p class="card-text"><small>{{ recipe.title }}</small></p>
-    </div>
-  </div> -->
 </template>
 
 
 <script>
 import { Recipe } from "../models/Recipe.js";
+import { favoritesService } from "../services/FavoritesService.js";
 import { recipesService } from "../services/RecipesService.js";
 import Pop from "../utils/Pop.js";
 
@@ -45,7 +36,19 @@ export default {
           console.error('[]', error)
           Pop.error(error)
         }
-      }
+      },
+
+       async favoriteRecipe() {
+        try {
+          const recipeId = {
+            recipeId: props.recipe.id,
+          };
+          await favoritesService.favoriteRecipe(recipeId);
+          Pop.success("Favorited");
+        } catch (error) {
+          Pop.error(error);
+        }
+      },
     }
   }
 }

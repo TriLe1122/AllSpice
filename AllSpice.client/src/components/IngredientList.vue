@@ -1,7 +1,8 @@
 <template>
-  <div class="component">
- <p></p>
- {{ingredient.name}}
+  <div class="component bg-warning">
+ <p>
+   {{ingredient.name}}
+ </p>
   </div>
 </template>
 

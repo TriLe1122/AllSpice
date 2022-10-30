@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid banner">
+
     <div class="row">
       <div class="d-flex justify-content-end">
         <SearchBar />
