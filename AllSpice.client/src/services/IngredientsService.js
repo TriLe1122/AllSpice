@@ -9,6 +9,15 @@ class IngredientsService {
     AppState.ingredients = res.data.map(i => new Ingredient(i))
     // console.log(AppState.ingredients);
   }
+
+  async addIngredient(ingredientData) {
+
+    const res = await api.post("api/ingredients", ingredientData);
+    console.log(res.data);
+
+    let newIngredient = new Ingredient(res.data)
+    AppState.ingredients = [newIngredient, ...AppState.ingredients]
+  }
 }
 
 export const ingredientsService = new IngredientsService()

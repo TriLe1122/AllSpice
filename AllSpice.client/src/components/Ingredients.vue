@@ -1,15 +1,10 @@
 <template>
-  <div class="component bg-warning">
- <p>
-   {{ingredient.name}}
- </p>
-  </div>
+  {{ ingredient.quantity }} {{ ingredient.name }}
 </template>
 
 
 <script>
 import { Ingredient } from "../models/Ingredient.js";
-
 export default {
   props: {
     ingredient: {
@@ -17,7 +12,7 @@ export default {
       required: true
     }
   },
-  setup(){
+  setup() {
     return {}
   }
 }
