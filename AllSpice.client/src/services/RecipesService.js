@@ -24,6 +24,11 @@ class RecipesService {
     const newRecipe = new Recipe(res.data);
     AppState.recipes = [newRecipe, ...AppState.recipes];
   }
+
+  async removeRecipe(recipeId) {
+     await api.delete(`api/recipes/${recipeId}`)
+    AppState.recipes = AppState.recipes.filter(r => r.id != recipeId)
+  }
 }
 
 export const recipesService = new RecipesService()
