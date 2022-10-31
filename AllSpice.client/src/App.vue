@@ -33,7 +33,7 @@ export default {
 
 
 main {
-  background-image: url(https://images.unsplash.com/photo-1605622834765-f9378d6c36c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1772&q=80);
+background-image: URL(https://images.unsplash.com/photo-1486485764572-92b96f21882a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80);
   background-attachment: fixed;
   background-position: center;
 }

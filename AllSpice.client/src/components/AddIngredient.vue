@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="addIngredient()" v-if="account.id == recipe.creatorId">
+  <form @submit.prevent="addIngredient()" >
     <div class="input-group d-flex">
       <div class="d-flex col-md-2">
         <input type="text" maxlength="3" name="ingredient quantity"
@@ -8,8 +8,8 @@
       <div class="d-flex col-10">
         <input type="text" name="ingredient name"
           class="border border-0 form-control input-group-text text-start rounded-0" maxlength="35"
-          placeholder="Add ingredient.." v-model="editable.name" />
-        <button class="btn btn-success rounded-0" type="submit">+</button>
+          placeholder="Add ingredient.." v-model="editable.name" :disabled="account.id != recipe.creatorId"/>
+        <button class="btn btn-success rounded-0" type="submit" :disabled="account.id != recipe.creatorId" >+</button>
       </div>
     </div>
 

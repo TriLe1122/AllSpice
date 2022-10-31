@@ -1,7 +1,7 @@
 <template>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade pic" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl ">
       <div class="modal-content all container-fluid p-0 pe-2">
         <div class="d-flex" v-if="recipe">
@@ -10,7 +10,7 @@
             <img :src="recipe?.img" alt="" class="imgcol rounded-start" @error="badImg" />
             <button type="button" class="btn-close closebtn " data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="col-md-8 p-4 ">
+          <div class="col-md-8 p-4">
             <div class="d-flex">
               <h4 class="ms-4">{{ recipe?.title }} </h4>
               <div class="bg-grey mb-4 px-2 rounded-5 ms-3 mt-1 pb-1">{{ recipe?.category }}</div>
@@ -113,6 +113,10 @@ export default {
 <style lang="scss" scoped>
 .modal-content {
   position: relative;
+}
+
+.pic{
+  background-image: URL(https://images.unsplash.com/photo-1602251627070-6a9bab4e420e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1776&q=80);
 }
 
 .closebtn {

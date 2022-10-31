@@ -29,6 +29,13 @@ class RecipesService {
      await api.delete(`api/recipes/${recipeId}`)
     AppState.recipes = AppState.recipes.filter(r => r.id != recipeId)
   }
+
+  async getAccountRecipes() {
+    const res = await api.get("api/recipes");
+    console.log(res.data);
+    AppState.recipes = res.data.map((r) => new Recipe(r));
+   AppState.recipes = AppState.recipes.filter((r) => r.creator.id == AppState.account.id);
+  }
 }
 
 export const recipesService = new RecipesService()

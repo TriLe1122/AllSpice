@@ -1,16 +1,15 @@
 <template>
-  <div class="component rounded-3 elevation-5" :style="{ backgroundImage: `url(${recipe.img})` }"
-    @click="getRecipeDetails()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <div class="component my-2 rounded-3 mt-4 elevation-5 hover" :style="{ backgroundImage: `url(${recipe.img})` }">
     <div class="d-flex justify-content-between">
-      <h6 class="glass-card rounded p-1 ms-2 mt-2">{{ recipe.category }}</h6>
-      <i class="mdi mdi-heart text-danger"></i>
+      <h6 class="rounded px-2 py-1 ms-2 mt-2 category">{{ recipe.category }}</h6>
+      <i class="mdi mdi-heart text-danger p-2 heart rounded-bottom mx-2 no-select selectable"
+        @click="favoriteRecipe()"></i>
     </div>
     <div class="">
-      <p class="glass-card title p-1 rounded">{{ recipe.title }}
-      </p>
+      <p class="title p-1 rounded-2 hoverable" @click="getRecipeDetails()" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">{{ recipe.title }}</p>
     </div>
   </div>
-
 </template>
 
 
@@ -19,7 +18,6 @@ import { Recipe } from "../models/Recipe.js";
 import { favoritesService } from "../services/FavoritesService.js";
 import { recipesService } from "../services/RecipesService.js";
 import Pop from "../utils/Pop.js";
-
 export default {
   props: {
     recipe: {
@@ -38,7 +36,7 @@ export default {
         }
       },
 
-       async favoriteRecipe() {
+      async favoriteRecipe() {
         try {
           const recipeId = {
             recipeId: props.recipe.id,
@@ -60,14 +58,26 @@ export default {
   width: 350px;
   height: 350px;
   position: relative;
-
   background-size: cover;
   background-position: center;
 }
 
 .title {
   position: absolute;
-  transform: translateY(8.5rem) translateX(2rem);
-  max-width: 200px;
+  transform: translateY(14.5rem) translateX(.5rem);
+  width: 330px;
+  max-height: 70px;
+  background-color: rgba(88, 88, 88, 0.853);
+  color: rgb(246, 245, 243);
+  font-size: large;
+}
+
+.category {
+  background-color: rgba(88, 88, 88, 0.853);
+  color: rgb(246, 245, 243);
+}
+
+.heart {
+  background-color: rgba(255, 255, 255, 0.607);
 }
 </style>
