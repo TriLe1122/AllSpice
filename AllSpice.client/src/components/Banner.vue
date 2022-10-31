@@ -44,7 +44,7 @@ export default {
     return {
       async getAccountFavorites() {
         try {
-          await accountService.getAccountFavorites();
+          await accountService.getAllFavorites();
         } catch (error) {
           Pop.error(error, "[getFavoriteRecipes]");
         }
