@@ -18,6 +18,12 @@ class IngredientsService {
     let newIngredient = new Ingredient(res.data)
     AppState.ingredients = [newIngredient, ...AppState.ingredients]
   }
+
+  async removeIngredient(ingredientId) {
+    await api.delete(`api/ingredients/${ingredientId}`)
+
+    AppState.ingredients = AppState.ingredients.filter(i => i.id != ingredientId)
+  }
 }
 
 export const ingredientsService = new IngredientsService()

@@ -4,6 +4,7 @@
       <h6 class="rounded px-2 py-1 ms-2 mt-2 category">{{ recipe.category }}</h6>
       <i class="mdi mdi-heart text-danger p-2 heart rounded-bottom mx-2 no-select selectable"
         @click="favoriteRecipe()"></i>
+        <i class="mdi mdi-close text-danger p-2 heart rounded-bottom mx-2 no-select selectable" @click="unFavoriteRecipe()"></i>
     </div>
     <div class="">
       <p class="title p-1 rounded-2 hoverable" @click="getRecipeDetails()" data-bs-toggle="modal"
@@ -14,6 +15,8 @@
 
 
 <script>
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState.js";
 import { Recipe } from "../models/Recipe.js";
 import { favoritesService } from "../services/FavoritesService.js";
 import { recipesService } from "../services/RecipesService.js";
@@ -27,6 +30,8 @@ export default {
   },
   setup(props) {
     return {
+      creator: computed(() => AppState.account.id == props.recipe.creator.id),
+      favorited: computed(() => AppState.favorites.find(f => f.id == props.recipe.id)),
       async getRecipeDetails() {
         try {
           await recipesService.getRecipeDetails(props.recipe.id)
@@ -43,6 +48,20 @@ export default {
           };
           await favoritesService.favoriteRecipe(recipeId);
           Pop.success("Favorited");
+        } catch (error) {
+          Pop.error(error);
+        }
+      },
+      async unFavoriteRecipe() {
+        try {
+          let id = this.favorited.favoriteId
+
+          const yes = await Pop.confirm();
+          if (!yes) {
+            return;
+          }
+          await favoritesService.unFavoriteRecipe(id);
+          Pop.success("Removed");
         } catch (error) {
           Pop.error(error);
         }
