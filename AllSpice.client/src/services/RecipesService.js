@@ -36,6 +36,16 @@ class RecipesService {
     AppState.recipes = res.data.map((r) => new Recipe(r));
    AppState.recipes = AppState.recipes.filter((r) => r.creator.id == AppState.account.id);
   }
+
+  async getRecipesBySearchTerm(query) {
+    const res = await api.get("api/recipes")
+    AppState.recipes = res.data.map(r => new Recipe(r))
+    // AppState.recipes = AppState.recipes.filter(f => f.category.includes(query))
+    
+    AppState.recipes = AppState.recipes.filter((f) =>
+      f.title.toUpperCase().includes(query.toUpperCase())
+    );
+  }
 }
 
 export const recipesService = new RecipesService()

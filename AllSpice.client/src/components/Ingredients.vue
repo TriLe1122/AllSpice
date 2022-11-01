@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex">
-    <i class="mdi mdi-close text-danger me-3"  @click="removeIngredient()"></i>
+    <i class="mdi mdi-close text-danger me-3"  @click="removeIngredient()" v-if="account.id == ingredient.creatorId"></i>
     <p>
       {{ ingredient.quantity }} {{ingredient.name}}
     </p>
