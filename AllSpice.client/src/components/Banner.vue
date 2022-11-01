@@ -34,6 +34,7 @@
 
 
 <script>
+import { AppState } from "../AppState.js";
 import { accountService } from "../services/AccountService.js";
 import { recipesService } from "../services/RecipesService.js";
 import Pop from "../utils/Pop.js";
@@ -44,6 +45,7 @@ export default {
     return {
       async getAccountFavorites() {
         try {
+          AppState.number = 1
           await accountService.getAllFavorites();
         } catch (error) {
           Pop.error(error, "[getFavoriteRecipes]");
@@ -51,6 +53,7 @@ export default {
       },
       async getAllRecipes() {
         try {
+          AppState.number = 0
           await recipesService.getAllRecipes();
         } catch (error) {
           Pop.error(error, "[getFavoriteRecipes]");
@@ -58,6 +61,7 @@ export default {
       },
       async getAccountRecipes() {
         try {
+          AppState.number = 0
           await recipesService.getAccountRecipes();
         } catch (error) {
           Pop.error(error);

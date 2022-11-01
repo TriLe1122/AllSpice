@@ -2,9 +2,10 @@
   <div class="component my-2 rounded-3 mt-4 elevation-5 hover" :style="{ backgroundImage: `url(${recipe.img})` }">
     <div class="d-flex justify-content-between">
       <h6 class="rounded px-2 py-1 ms-2 mt-2 category">{{ recipe.category }}</h6>
-      <i class="mdi mdi-heart text-danger p-2 heart rounded-bottom mx-2 no-select selectable"
-        @click="favoriteRecipe()"></i>
-        <i class="mdi mdi-close text-danger p-2 heart rounded-bottom mx-2 no-select selectable" @click="unFavoriteRecipe()"></i>
+      <i class="mdi mdi-close text-danger p-2 heart rounded-bottom mx-2 no-select selectable"
+        @click="unFavoriteRecipe()" v-if="favorited"></i>
+      <i class="mdi mdi-heart text-white p-2 heart rounded-bottom mx-2 no-select selectable" @click="favoriteRecipe()"
+        v-else></i>
     </div>
     <div class="">
       <p class="title p-1 rounded-2 hoverable" @click="getRecipeDetails()" data-bs-toggle="modal"
@@ -43,10 +44,12 @@ export default {
 
       async favoriteRecipe() {
         try {
-          const recipeId = {
-            recipeId: props.recipe.id,
-          };
-          await favoritesService.favoriteRecipe(recipeId);
+          // const recipeId = {
+          //   recipeId: props.recipe.id,
+          // };
+
+          await favoritesService.favoriteRecipe(props.recipe);
+
           Pop.success("Favorited");
         } catch (error) {
           Pop.error(error);

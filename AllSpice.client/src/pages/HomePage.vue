@@ -42,7 +42,7 @@ export default {
     async function getAllFavorites() {
       try {
         if (AppState.account) {
-          await accountService.getAllFavorites()
+          await accountService.getMyFavorites()
         }
       } catch (error) {
         console.error('[]', error)

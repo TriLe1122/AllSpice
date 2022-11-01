@@ -18,6 +18,8 @@
             <div class="d-flex justify-content-around ms-4">
               <div class="position-absolute selectable deleteicon rounded-3"><i class="mdi mdi-delete fs-3"
                   @click="removeRecipe()" data-bs-dismiss="modal" v-if="account.id == recipe.creatorId"></i></div>
+
+                  
               <div class="col-md-6">
                 <div class="ms-3 bg-dark text-center rounded-top p-2">
                   <h5 class="mt-1">Ingredients</h5>
@@ -38,7 +40,6 @@
                   <h5 class="mt-1">Steps</h5>
                 </div>
                 <div class=" ms-3 rounded-0 bg-grey rounded box position-relative">
-
                   <div class="ms-3 mt-1">
                     <div class="">
                       {{ recipe?.instructions }}
@@ -48,6 +49,8 @@
                 <div class="p-2 ms-3 bg-grey rounded-bottom">
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>
