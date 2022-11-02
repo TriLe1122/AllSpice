@@ -19,7 +19,7 @@
               <div class="position-absolute selectable deleteicon rounded-3"><i class="mdi mdi-delete fs-3"
                   @click="removeRecipe()" data-bs-dismiss="modal" v-if="account.id == recipe.creatorId"></i></div>
 
-                  
+
               <div class="col-md-6">
                 <div class="ms-3 bg-dark text-center rounded-top p-2">
                   <h5 class="mt-1">Ingredients</h5>
@@ -36,11 +36,32 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="ms-3 bg-dark text-center rounded-top p-2">
-                  <h5 class="mt-1">Steps</h5>
+                <div class="ms-3 bg-dark text-center rounded-top p-2 d-flex justify-content-around">
+                  <div class="col-1"></div>
+                  <div class="col-6">
+                    <h5 class="mt-1">Steps</h5>
+                  </div>
+                  <div class="col-1">
+                    <button v-if="account.id == recipe.creatorId" class="rounded-circle border border-white mt-1 hover"
+                      type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false"
+                      aria-controls="collapseExample">
+                      <i class="mdi mdi-pencil text-primary" title="Edit instructions."></i>
+                    </button>
+                  </div>
                 </div>
                 <div class=" ms-3 rounded-0 bg-grey rounded box position-relative">
                   <div class="ms-3 mt-1">
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body me-3 p-1">
+                        <form @submit.prevent="handleSubmit()">
+                          <textarea v-model="editable.instructions" type="text" name="instructions"
+                            class="text-start border border-0 form-control input-group-text rounded-0"
+                            placeholder="Edit instructions."></textarea>
+                            <button class="btn btn-success" type="submit">submit</button>
+                        </form>
+
+                      </div>
+                    </div>
                     <div class="">
                       {{ recipe?.instructions }}
                     </div>
@@ -59,7 +80,7 @@
   </div>
 </template>
 <script>
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 import { watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import { Recipe } from "../models/Recipe.js";
@@ -75,6 +96,7 @@ export default {
     }
   },
   setup(props) {
+    const editable = ref({});
     async function getIngredientsByRecipeId() {
       try {
         if (AppState.activeRecipe) {
@@ -91,6 +113,7 @@ export default {
       getIngredientsByRecipeId();
     });
     return {
+      editable,
       ingredients: computed(() => AppState.ingredients),
       account: computed(() => AppState.account),
       async removeRecipe() {
@@ -108,6 +131,16 @@ export default {
           Pop.error(error);
         }
       },
+
+      async handleSubmit() {
+        try {
+          let recipeId = AppState.activeRecipe.id
+            await recipesService.editRecipe(editable.value, recipeId)
+          } catch (error) {
+            console.error('[]',error)
+            Pop.error(error)
+          }
+      }
     };
   },
   components: { Ingredients, AddIngredient }
@@ -118,7 +151,7 @@ export default {
   position: relative;
 }
 
-.pic{
+.pic {
   background-image: URL(https://images.unsplash.com/photo-1602251627070-6a9bab4e420e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1776&q=80);
 }
 

@@ -46,6 +46,11 @@ class RecipesService {
       f.title.toUpperCase().includes(query.toUpperCase())
     );
   }
+
+  async editRecipe(recipeData, recipeId) {
+    const res = await api.put(`api/recipes/${recipeId}`, recipeData)
+    AppState.activeRecipe = new Recipe(res.data)
+  }
 }
 
 export const recipesService = new RecipesService()
